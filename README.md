@@ -1,4 +1,4 @@
-# my_stock_analsys
+# My stock analsys
 
 A new Flutter project.
 
