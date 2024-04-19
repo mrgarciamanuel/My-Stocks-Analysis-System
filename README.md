@@ -1,7 +1,5 @@
 # My stock analsys
 
-A new Flutter project.
-
 ## Getting Started
 
 1. API key
