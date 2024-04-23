@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/companyController.dart';
+import 'package:my_stock_analsys/models/car.dart';
 import 'package:my_stock_analsys/models/company.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,12 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<List<Car>> futureCars;
   late Future<List<Company>> futureCompanies;
 
   @override
   void initState() {
     super.initState();
-    futureCompanies = getCompanies();
+    futureCars = getCars();
   }
 
   @override
@@ -46,31 +48,41 @@ class _HomePageState extends State<HomePage> {
                 const Duration(seconds: 1),
                 () {
                   setState(() {
-                    futureCompanies = getCompanies();
+                    futureCars = getCars();
                   });
                 },
               );
             },
-            child: const Text("OK"),
-            /*child: FutureBuilder<List<Company>>(
-            future: futureCompanies,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return SizedBox(
-                  child: Text("OK"),
-                );
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SizedBox(
-                  height: 5,
-                  child: Center(
-                    child: LinearProgressIndicator(),
-                  ),
-                );
-              } else {
-                return const Text('Error');
-              }
-            },
-          ),*/
+            //child: const Text("OK"),
+            child: FutureBuilder<List<Car>>(
+              future: futureCars,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Car> cars = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: cars.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(cars[index].car),
+                          subtitle: Text(cars[index].carModel),
+                        ),
+                      );
+                    },
+                  );
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return const SizedBox(
+                    height: 5,
+                    child: Center(
+                      child: LinearProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  return const Text('Error');
+                }
+              },
+            ),
           )),
     );
   }
