@@ -15,7 +15,7 @@ class Car {
   factory Car.fromJson(Map<String, dynamic> jsonObj) => Car(
         id: jsonObj['id'].toString(),
         car: jsonObj['car'].toString(),
-        carModel: jsonObj['carModel'].toString(),
-        carColor: jsonObj['carColor'].toString(),
+        carModel: jsonObj['car_model'].toString(),
+        carColor: jsonObj['car_color'].toString(),
       );
 }

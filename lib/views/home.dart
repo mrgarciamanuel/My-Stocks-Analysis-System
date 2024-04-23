@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/companyController.dart';
 import 'package:my_stock_analsys/models/car.dart';
 import 'package:my_stock_analsys/models/company.dart';
+import 'package:my_stock_analsys/controllers/general.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -79,7 +80,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 } else {
-                  return const Text('Error');
+                  return showSomethingWentWrong(
+                      MediaQuery.of(context).size.height,
+                      MediaQuery.of(context).size.width,
+                      "Unble to load data",
+                      "Please try again later");
                 }
               },
             ),
