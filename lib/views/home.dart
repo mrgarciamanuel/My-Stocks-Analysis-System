@@ -25,7 +25,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Companies'),
+        title: const Text(
+          'Companies',
+          style: TextStyle(color: Colors.black, fontSize: 17),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            debugPrint("Menu");
+          },
+        ),
         actions: <Widget>[
           PopupMenuButton(
               itemBuilder: (content) => [
