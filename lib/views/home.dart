@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_stock_analsys/controllers/companyController.dart';
 import 'package:my_stock_analsys/models/company.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,17 +10,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<List<Company>> futureCompanies;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCompanies = getCompanies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.all(10),
         child: RefreshIndicator(
           onRefresh: () {
-            debugPrint('Refreshed');
+            return Future.delayed(
+              const Duration(seconds: 1),
+              () {
+                setState(() {
+                  futureCompanies = getCompanies();
+                });
+              },
+            );
           },
-          child: FutureBuilder<List<Company>>(
-              //future: ,
-              ),
+          child: const Text("OK"),
+          /*child: FutureBuilder<List<Company>>(
+            future: futureCompanies,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return SizedBox(
+                  child: Text("OK"),
+                );
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SizedBox(
+                  height: 5,
+                  child: Center(
+                    child: LinearProgressIndicator(),
+                  ),
+                );
+              } else {
+                return const Text('Error');
+              }
+            },
+          ),*/
         ));
   }
 }
