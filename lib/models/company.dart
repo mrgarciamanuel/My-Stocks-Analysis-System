@@ -15,7 +15,7 @@ class Company {
     required this.description,
   });
 
-  factory Company.froJson(Map<String, dynamic> jsonObj) => Company(
+  factory Company.fromJson(Map<String, dynamic> jsonObj) => Company(
         name: jsonObj['name'],
         location: jsonObj['location'],
         imgURL: jsonObj['imgURL'],
