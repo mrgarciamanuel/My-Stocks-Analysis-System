@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 Widget showSomethingWentWrong(
     double hight, double width, String errorMessage1, String errorMessage2) {
@@ -25,4 +27,13 @@ Widget showSomethingWentWrong(
     ),
   );
   return widget;
+}
+
+showSnackBar(BuildContext context, String message, int error) {
+  showTopSnackBar(
+    Overlay.of(context),
+    error == 1
+        ? CustomSnackBar.success(message: message)
+        : CustomSnackBar.error(message: message),
+  );
 }

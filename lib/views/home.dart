@@ -63,12 +63,16 @@ class _HomePageState extends State<HomePage> {
                 },
               );
             },
-            //child: const Text("OK"),
             child: FutureBuilder<List<Car>>(
               future: futureCars,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<Car> cars = snapshot.data!;
+                  if (context.mounted) {
+                    Future.delayed(const Duration(seconds: 0), () {
+                      showSnackBar(context, "Data loaded", 1);
+                    });
+                  }
                   return ListView.builder(
                     itemCount: cars.length,
                     itemBuilder: (context, index) {
@@ -89,6 +93,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 } else {
+                  Future.delayed(const Duration(seconds: 0), () {
+                    showSnackBar(context, "Something went wrong", 2);
+                  });
                   return showSomethingWentWrong(
                       MediaQuery.of(context).size.height,
                       MediaQuery.of(context).size.width,
