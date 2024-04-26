@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_stock_analsys/controllers/companyController.dart';
-import 'package:my_stock_analsys/models/car.dart';
+import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
 
@@ -12,13 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Car>> futureCars;
   late Future<List<Company>> futureCompanies;
 
   @override
   void initState() {
     super.initState();
-    futureCars = getCars();
   }
 
   @override
@@ -28,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green,
         title: const Text(
           'Companies',
-          style: TextStyle(color: Colors.black, fontSize: 17),
+          style: TextStyle(color: Colors.white, fontSize: 17),
         ),
         leading: IconButton(
           icon: const Icon(Icons.home),
@@ -54,58 +51,38 @@ class _HomePageState extends State<HomePage> {
       body: Container(
           margin: const EdgeInsets.all(10),
           child: RefreshIndicator(
-            onRefresh: () {
-              return Future.delayed(
-                const Duration(seconds: 1),
-                () {
-                  setState(() {
-                    futureCars = getCars();
-                  });
-                },
-              );
-            },
-            child: FutureBuilder<List<Car>>(
-              future: futureCars,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<Car> cars = snapshot.data!;
-                  if (context.mounted) {
-                    Future.delayed(const Duration(seconds: 0), () {
-                      showSnackBar(context, "Data loaded", 1);
+              onRefresh: () {
+                return Future.delayed(
+                  const Duration(seconds: 1),
+                  () {
+                    setState(() {
+                      showSnackBar(context, "Data loaded", 0);
                     });
-                  }
-                  return ListView.builder(
-                    itemCount: cars.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
-                          title: Text(cars[index].car),
-                          subtitle: Text(cars[index].carModel),
-                        ),
-                      );
-                    },
-                  );
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return const SizedBox(
-                    height: 5,
-                    child: Center(
-                      child: LinearProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  Future.delayed(const Duration(seconds: 0), () {
-                    showSnackBar(context, "Something went wrong", 2);
-                  });
-                  return showSomethingWentWrong(
-                      MediaQuery.of(context).size.height,
-                      MediaQuery.of(context).size.width,
-                      "Unble to load data",
-                      "Please try again later");
-                }
+                  },
+                );
               },
-            ),
-          )),
+              child: ListView.builder(
+                itemCount: companies.length,
+                itemBuilder: (context, index) {
+                  return CheckboxListTile(
+                    activeColor: Colors.green,
+                    checkColor: Colors.white,
+                    selected: companies[index].value!,
+                    value: companies[index].value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        companies[index].value = value!;
+                        showSnackBar(
+                            context, "Choosed:" + companies[index].name, 0);
+                      });
+                    },
+                    title: Text(companies[index].name),
+                    subtitle: Text(companies[index].industry),
+                    /*secondary: Image.network(
+                          "https://drive.google.com/file/d/1bqZTSQSi9r5m91TWSynS7Yw-FuPv0dRA/view?usp=sharing")*/
+                  );
+                },
+              ))),
     );
   }
 }

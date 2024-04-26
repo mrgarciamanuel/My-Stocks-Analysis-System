@@ -32,7 +32,7 @@ Widget showSomethingWentWrong(
 showSnackBar(BuildContext context, String message, int error) {
   showTopSnackBar(
     Overlay.of(context),
-    error == 1
+    error == 0
         ? CustomSnackBar.success(message: message)
         : CustomSnackBar.error(message: message),
   );
