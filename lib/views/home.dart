@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_stock_analsys/controllers/companyController.dart';
+import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
+import 'package:my_stock_analsys/controllers/general.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,14 +16,23 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    futureCompanies = getCompanies();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Companies'),
+        backgroundColor: Colors.green,
+        title: const Text(
+          'Companies',
+          style: TextStyle(color: Colors.white, fontSize: 17),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            debugPrint("Menu");
+          },
+        ),
         actions: <Widget>[
           PopupMenuButton(
               itemBuilder: (content) => [
@@ -41,37 +51,38 @@ class _HomePageState extends State<HomePage> {
       body: Container(
           margin: const EdgeInsets.all(10),
           child: RefreshIndicator(
-            onRefresh: () {
-              return Future.delayed(
-                const Duration(seconds: 1),
-                () {
-                  setState(() {
-                    futureCompanies = getCompanies();
-                  });
+              onRefresh: () {
+                return Future.delayed(
+                  const Duration(seconds: 1),
+                  () {
+                    setState(() {
+                      showSnackBar(context, "Data loaded", 0);
+                    });
+                  },
+                );
+              },
+              child: ListView.builder(
+                itemCount: companies.length,
+                itemBuilder: (context, index) {
+                  return CheckboxListTile(
+                    activeColor: Colors.green,
+                    checkColor: Colors.white,
+                    selected: companies[index].value!,
+                    value: companies[index].value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        companies[index].value = value!;
+                        showSnackBar(
+                            context, "Choosed:" + companies[index].name, 0);
+                      });
+                    },
+                    title: Text(companies[index].name),
+                    subtitle: Text(companies[index].industry),
+                    /*secondary: Image.network(
+                          "https://drive.google.com/file/d/1bqZTSQSi9r5m91TWSynS7Yw-FuPv0dRA/view?usp=sharing")*/
+                  );
                 },
-              );
-            },
-            child: const Text("OK"),
-            /*child: FutureBuilder<List<Company>>(
-            future: futureCompanies,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return SizedBox(
-                  child: Text("OK"),
-                );
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SizedBox(
-                  height: 5,
-                  child: Center(
-                    child: LinearProgressIndicator(),
-                  ),
-                );
-              } else {
-                return const Text('Error');
-              }
-            },
-          ),*/
-          )),
+              ))),
     );
   }
 }
