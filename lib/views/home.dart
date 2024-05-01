@@ -83,6 +83,9 @@ class _HomePageState extends State<HomePage> {
 
                               if (cont <= 1) {
                                 companies[index].value = value!;
+                              } else {
+                                showSnackBar(context,
+                                    "You can only select two companies", 1);
                               }
                             });
                           },
