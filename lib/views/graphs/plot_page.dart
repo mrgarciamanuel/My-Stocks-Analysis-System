@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
 import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
+import 'package:my_stock_analsys/views/graphs/line_plot.dart';
 
 class PlotPage extends StatefulWidget {
   //this list brings the selected companies from the home page
@@ -16,6 +17,7 @@ class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: buildAppBar(context, "Plot Page", true),
         body: SizedBox(
@@ -42,10 +44,11 @@ class _PlotPageState extends State<PlotPage> {
                 ],
               ),
               //this can be replaced wiht widget that will display the graph
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: const Text("Graph will be displayed here",
-                    style: TextStyle(fontSize: 20)),
+              SizedBox(
+                child: CustomPaint(
+                  size: Size(width - 10, width - 10),
+                  painter: LinePlot(),
+                ),
               )
             ],
           ),
