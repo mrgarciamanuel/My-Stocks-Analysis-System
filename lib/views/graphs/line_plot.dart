@@ -24,7 +24,7 @@ class LinePlot extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     canvas.drawLine(p1, p2, paint);
-    return [y2.toInt() - 10, x2.toInt() - 10];
+    return [x1.toInt() - 10, x2.toInt() - 10];
   }
 
   ///designs the x axis
@@ -51,12 +51,11 @@ class LinePlot extends CustomPainter {
 
   void drawXMarkers(Canvas canvas, Size size, double startX, double startY) {
     double separator = 45;
-    double x1 = startX;
-    double x2 = startX;
+    double x = startX;
 
     for (int i = 0; i < 7; i++) {
-      final p1 = Offset(x1 + separator, size.height - 10);
-      final p2 = Offset(x2 + separator, size.height - 30);
+      final p1 = Offset(x + separator, size.height - 10);
+      final p2 = Offset(x + separator, size.height - 30);
       canvas.drawLine(p1, p2, customPaint);
       separator += 45;
     }
@@ -64,8 +63,14 @@ class LinePlot extends CustomPainter {
 
   void drawYMarkers(Canvas canvas, Size size, double startX, double startY) {
     double separator = 45;
-    double x1 = startX;
-    double x2 = startX;
+    double x = startX;
+    double y = size.height - 20;
+    for (int i = 0; i < 7; i++) {
+      final p1 = Offset(x, y - separator);
+      final p2 = Offset(x + 20, y - separator);
+      canvas.drawLine(p1, p2, customPaint);
+      separator += 45;
+    }
   }
 
   ///size: é o tamanho da area onde vamos desenhar
@@ -84,9 +89,13 @@ class LinePlot extends CustomPainter {
     );
     drawXAxis(canvas, size);
     drawYAxis(canvas, size);
-    int startX = drawXAxis(canvas, size)[0];
-    int startY = drawYAxis(canvas, size)[1];
-    drawXMarkers(canvas, size, startX.toDouble(), startY.toDouble());
+    int startXaxiX = drawXAxis(canvas, size)[0];
+    int startYaxiX = drawYAxis(canvas, size)[1];
+
+    int startXaxiY = drawYAxis(canvas, size)[0];
+    int startYaxiY = drawYAxis(canvas, size)[1];
+    drawXMarkers(canvas, size, startXaxiX.toDouble(), startYaxiX.toDouble());
+    drawYMarkers(canvas, size, startXaxiY.toDouble(), startYaxiY.toDouble());
   }
 
   @override
