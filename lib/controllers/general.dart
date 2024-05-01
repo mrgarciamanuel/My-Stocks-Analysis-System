@@ -47,5 +47,9 @@ generateGraph(BuildContext context, List<Company> companies) {
     }
   }
 
-  showSnackBar(context, data.toString(), 0);
+  if (data.isNotEmpty) {
+    showSnackBar(context, data.toString(), 0);
+  } else {
+    showSnackBar(context, "Need to select at least one company", 1);
+  }
 }
