@@ -74,7 +74,16 @@ class _HomePageState extends State<HomePage> {
                           value: companies[index].value,
                           onChanged: (bool? value) {
                             setState(() {
-                              companies[index].value = value!;
+                              var cont = 0;
+                              for (var company in companies) {
+                                if (company.value == true) {
+                                  cont++;
+                                }
+                              }
+
+                              if (cont <= 1) {
+                                companies[index].value = value!;
+                              }
                             });
                           },
                           title: Text(companies[index].name),
