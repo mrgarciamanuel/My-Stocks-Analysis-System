@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LinePlot extends CustomPainter {
-  void drawYAxis(Canvas canvas, Size size) {
+  final customPaint = Paint()
+    ..color = const Color.fromARGB(255, 0, 0, 0)
+    ..strokeWidth = 2
+    ..style = PaintingStyle.stroke;
+
+  ///designs the y axis
+  ///canvas: is the object we are going to draw
+  ///size: is the size of the area where we are going to draw
+  ///the function return an int value in where will start building the markers of this axis
+  List<int> drawYAxis(Canvas canvas, Size size) {
     double x1 = 20;
     double x2 = 20;
     double y1 = 20;
@@ -15,9 +24,14 @@ class LinePlot extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     canvas.drawLine(p1, p2, paint);
+    return [y2.toInt() - 10, x2.toInt() - 10];
   }
 
-  void drawXAxis(Canvas canvas, Size size) {
+  ///designs the x axis
+  ///canvas: is the object we are going to draw
+  ///size: is the size of the area where we are going to draw
+  ///the function return an int value in where will start building the markers of this axis
+  List<int> drawXAxis(Canvas canvas, Size size) {
     //par de valores para x e y
     const double x1 = 10;
     double x2 = size.width - 20;
@@ -32,6 +46,26 @@ class LinePlot extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     canvas.drawLine(p1, p2, paint);
+    return [x1.toInt() + 10, y1.toInt()];
+  }
+
+  void drawXMarkers(Canvas canvas, Size size, double startX, double startY) {
+    double separator = 45;
+    double x1 = startX;
+    double x2 = startX;
+
+    for (int i = 0; i < 7; i++) {
+      final p1 = Offset(x1 + separator, size.height - 10);
+      final p2 = Offset(x2 + separator, size.height - 30);
+      canvas.drawLine(p1, p2, customPaint);
+      separator += 45;
+    }
+  }
+
+  void drawYMarkers(Canvas canvas, Size size, double startX, double startY) {
+    double separator = 45;
+    double x1 = startX;
+    double x2 = startX;
   }
 
   ///size: é o tamanho da area onde vamos desenhar
@@ -50,6 +84,9 @@ class LinePlot extends CustomPainter {
     );
     drawXAxis(canvas, size);
     drawYAxis(canvas, size);
+    int startX = drawXAxis(canvas, size)[0];
+    int startY = drawYAxis(canvas, size)[1];
+    drawXMarkers(canvas, size, startX.toDouble(), startY.toDouble());
   }
 
   @override
