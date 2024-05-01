@@ -12,7 +12,7 @@ class _PlotPageState extends State<PlotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(),
+        appBar: buildAppBar(context, "Plot Page", true),
         body: Container(
           child: const Text("Plot Page"),
         ));

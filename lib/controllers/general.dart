@@ -49,26 +49,29 @@ generateGraph(BuildContext context, List<Company> companies) {
   }
 
   if (data.isNotEmpty) {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => PlotPage()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const PlotPage()));
   } else {
     showSnackBar(context, "Need to select at least one company", 1);
   }
 }
 
-AppBar buildAppBar() {
+AppBar buildAppBar(BuildContext context, String title, bool back) {
   return AppBar(
     backgroundColor: Colors.green,
-    title: const Text(
-      'Companies',
-      style: TextStyle(color: Colors.white, fontSize: 17),
+    title: Text(
+      title,
+      style: const TextStyle(color: Colors.white, fontSize: 17),
     ),
-    leading: IconButton(
-      icon: const Icon(Icons.home),
-      onPressed: () {
-        debugPrint("Menu");
-      },
-    ),
+    leading: !back
+        ? const IconButton(
+            icon: Icon(Icons.home),
+            onPressed: null,
+          )
+        : IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
     actions: <Widget>[
       PopupMenuButton(
           itemBuilder: (content) => [
