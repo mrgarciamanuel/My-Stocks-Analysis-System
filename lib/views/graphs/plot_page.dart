@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
+import 'package:my_stock_analsys/models/company.dart';
 
 class PlotPage extends StatefulWidget {
-  const PlotPage({super.key});
+  //this list brings the selected companies from the home page
+  final List<Company>? companies;
+  const PlotPage({super.key, this.companies});
 
   @override
   State<PlotPage> createState() => _PlotPageState();
@@ -48,8 +51,12 @@ class _PlotPageState extends State<PlotPage> {
                         });
                       }),
                   ElevatedButton(
+                      //trigger the graph generation
                       onPressed: () {
-                        showSnackBar(context, "You shoosed", 0);
+                        showSnackBar(
+                            context,
+                            "You choosed: " + defaultDropdownValue + " to plot",
+                            0);
                       },
                       child: const Text("Generate Graph"))
                 ],
