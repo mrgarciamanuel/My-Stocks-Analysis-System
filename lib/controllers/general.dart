@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_stock_analsys/models/company.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -36,4 +37,15 @@ showSnackBar(BuildContext context, String message, int error) {
         ? CustomSnackBar.success(message: message)
         : CustomSnackBar.error(message: message),
   );
+}
+
+generateGraph(BuildContext context, List<Company> companies) {
+  List data = [];
+  for (var company in companies) {
+    if (company.value == true) {
+      data.add(company.name);
+    }
+  }
+
+  showSnackBar(context, data.toString(), 0);
 }

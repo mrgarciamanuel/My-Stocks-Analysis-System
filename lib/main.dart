@@ -21,28 +21,6 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.green,
       ),
       home: const HomePage(),
-      builder: (context, child) {
-        return Stack(
-          children: [
-            child!,
-            Positioned(
-              left: offSet.dx,
-              top: offSet.dy,
-              child: GestureDetector(
-                /*onPanUpdate: (details) => StepState(() =>
-                    _offSet += Offset(details.delta.dx, details.delta.dy)),*/
-                child: FloatingActionButton(
-                  onPressed: () {
-                    debugPrint("Menu");
-                  },
-                  child: const Icon(Icons.auto_graph),
-                  backgroundColor: Colors.green,
-                ),
-              ),
-            )
-          ],
-        );
-      },
     );
   }
 }
