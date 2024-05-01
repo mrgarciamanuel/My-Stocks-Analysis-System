@@ -23,6 +23,9 @@ class _PlotPageState extends State<PlotPage> {
         body: SizedBox(
           child: Column(
             children: <Widget>[
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -42,6 +45,9 @@ class _PlotPageState extends State<PlotPage> {
                       },
                       child: const Text("Generate Graph"))
                 ],
+              ),
+              const SizedBox(
+                height: 20,
               ),
               //this can be replaced wiht widget that will display the graph
               SizedBox(
