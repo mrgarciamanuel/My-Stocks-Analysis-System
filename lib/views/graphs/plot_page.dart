@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
+import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
 
 class PlotPage extends StatefulWidget {
@@ -13,25 +14,6 @@ class PlotPage extends StatefulWidget {
 
 class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
-  var items = [
-    const DropdownMenuItem(
-      value: "line",
-      child: Text("Line Graph"),
-    ),
-    const DropdownMenuItem(
-      value: "histogram",
-      child: Text("Histogram Graph"),
-    ),
-    const DropdownMenuItem(
-      value: "area",
-      child: Text("Area Graph"),
-    ),
-    const DropdownMenuItem(
-      value: "stacked",
-      child: Text("Stacked Graph"),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

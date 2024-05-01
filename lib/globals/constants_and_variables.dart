@@ -1,4 +1,5 @@
 import 'package:my_stock_analsys/models/company.dart';
+import 'package:flutter/material.dart';
 
 List<Company> companies1 = List<Company>.empty(growable: true);
 Company google = Company(
@@ -234,4 +235,23 @@ List<Company> companies = [
   dell,
   spacex,
   boeing,
+];
+
+var items = [
+  const DropdownMenuItem(
+    value: "line",
+    child: Text("Line Graph"),
+  ),
+  const DropdownMenuItem(
+    value: "histogram",
+    child: Text("Histogram Graph"),
+  ),
+  const DropdownMenuItem(
+    value: "area",
+    child: Text("Area Graph"),
+  ),
+  const DropdownMenuItem(
+    value: "stacked",
+    child: Text("Stacked Graph"),
+  ),
 ];
