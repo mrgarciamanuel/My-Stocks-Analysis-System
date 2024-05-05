@@ -11,8 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Company>> futureCompanies;
-
   @override
   void initState() {
     super.initState();
@@ -29,9 +27,7 @@ class _HomePageState extends State<HomePage> {
           ),
           leading: IconButton(
             icon: const Icon(Icons.home),
-            onPressed: () {
-              debugPrint("Menu");
-            },
+            onPressed: () {},
           ),
           actions: <Widget>[
             PopupMenuButton(
@@ -102,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               ElevatedButton.icon(
                 icon: const Icon(Icons.bar_chart),
                 onPressed: () {
-                  generateGraph(context, companies);
+                  generateGraph(context, selectedCompanies(companies));
                 },
                 label: const Text("Generate Graph"),
               )
@@ -110,4 +106,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ));
   }
+}
+
+selectedCompanies(List<Company> companies) {
+  List<Company> selectedCompanies = [];
+  for (var company in companies) {
+    if (company.value == true) {
+      selectedCompanies.add(company);
+    }
+  }
+  return selectedCompanies;
 }

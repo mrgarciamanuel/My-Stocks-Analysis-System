@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_stock_analsys/models/company.dart';
 
 class LinePlot extends CustomPainter {
+  final List<Company> companies = [];
+  LinePlot(List<Company> selectedCompanies) {
+    companies.addAll(selectedCompanies);
+  }
   int nElements = 7;
   List<List<Offset>> xPoints = [];
   List<List<Offset>> yPoints = [];
@@ -18,7 +23,7 @@ class LinePlot extends CustomPainter {
 
   //valores que a empresa tem em cada dia
   List<List<int>> prices = [
-    [4, 1, 3, 1, 7, 4, 1],
+    [4, 1, 3, 1, 7, 6, 1],
     [7, 3, 2, 3, 6, 2, 4]
   ];
 
