@@ -15,6 +15,10 @@ class PlotPage extends StatefulWidget {
 
 class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
+  var plots = Map<String, CustomPainter>();
+
+  //plots["plot"] = LinePlot();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

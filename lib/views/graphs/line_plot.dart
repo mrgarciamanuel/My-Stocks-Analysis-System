@@ -15,10 +15,12 @@ class LinePlot extends CustomPainter {
   ];
   //valores disponíveis em y que uma empresa pode ter
   List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
-  //List<String> xValues = [1, 2, 3, 4, 5, 6, 7];
 
   //valores que a empresa tem em cada dia
-  List<int> prices = [1, 3, 7, 1, 7, 2, 7];
+  List<List<int>> prices = [
+    [4, 3, 7, 1, 7, 2, 7],
+    [7, 3, 2, 1, 6, 2, 7]
+  ];
 
   getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
     final customPaint = Paint()
@@ -115,62 +117,69 @@ class LinePlot extends CustomPainter {
   void drawPoint(
       Canvas canvas,
       Size size,
-      List<int> values,
+      List<List<int>> values,
       List<List<Offset>> xPoints,
       List<List<Offset>> yPoints,
       List<int> yValues) {
+    Map<int, Color> colors = {0: Colors.black, 1: Colors.red};
     Offset initialPoint = const Offset(0, 0);
     Offset endPoint = const Offset(0, 0);
     int cont = 0;
-    for (int i = (nElements - 1); i >= 0; i--) {
-      //posição do valor no eixo y
-      var value = prices[i];
-      var pos = yValues.indexOf(value);
+    for (int j = 0; j < prices.length; j++) {
+      for (int i = (nElements - 1); i >= 0; i--) {
+        //posição do valor no eixo y
+        var value = prices[j][i];
+        var pos = yValues.indexOf(value);
 
-      //como estamos desenhando de trás para frente, precisamos pegar o próximo valor que será tratado como o ponto inicial do próximo desenho
-      if (i >= 1) {
-        var nextValue = prices[i - 1];
-        var nextLabel = labels[i - 1];
-        var nextPosY = yValues.indexOf(nextValue);
-        var nextPosX = labels.indexOf(nextLabel);
-        if (i == 6) {
-          initialPoint =
-              Offset(xPoints[nextPosX][2].dx, yPoints[nextPosY][2].dy);
+        //como estamos a desenhar de trás para frente, precisamos pegar o próximo valor que será tratado como o ponto inicial do próximo desenho
+        if (i >= 1) {
+          var nextValue = prices[j][i - 1];
+          var nextLabel = labels[i - 1];
+          var nextPosY = yValues.indexOf(nextValue);
+          var nextPosX = labels.indexOf(nextLabel);
+          if (i == 6) {
+            initialPoint =
+                Offset(xPoints[nextPosX][2].dx, yPoints[nextPosY][2].dy);
+          }
+          endPoint = Offset(xPoints[nextPosX][2].dx, yPoints[nextPosY][2].dy);
         }
-        endPoint = Offset(xPoints[nextPosX][2].dx, yPoints[nextPosY][2].dy);
+
+        if (cont == 0) {
+          endPoint = Offset(xPoints[i][2].dx, yPoints[pos][2].dy);
+        }
+        //print(color.toString());
+        final paint = Paint()
+          ..color = colors[j]!
+          ..strokeWidth = 3
+          ..style = PaintingStyle.fill;
+
+        canvas.drawCircle(
+            Offset(xPoints[i][2].dx, yPoints[pos][2].dy), 2, paint);
+
+        //desenho da primeira linha, começar do zero
+        if (i == 0) {
+          drawLineLink(
+              canvas,
+              Offset(30, size.height - 30),
+              Offset(xPoints[i][2].dx, yPoints[pos][2].dy),
+              j == 0 ? Colors.black : Colors.red);
+        } else if (i == (nElements - 1)) {
+          //desenho da última linha
+          drawLineLink(canvas, initialPoint, endPoint, colors[j]!);
+        } else {
+          //desenho da penúltima linha até a segunda
+          drawLineLink(canvas, initialPoint, endPoint, colors[j]!);
+          initialPoint = endPoint;
+        }
+        cont++;
       }
-
-      if (cont == 0) {
-        endPoint = Offset(xPoints[i][2].dx, yPoints[pos][2].dy);
-      }
-
-      final paint = Paint()
-        ..color = const Color.fromARGB(255, 0, 0, 0)
-        ..strokeWidth = 3
-        ..style = PaintingStyle.fill;
-
-      canvas.drawCircle(Offset(xPoints[i][2].dx, yPoints[pos][2].dy), 2, paint);
-
-      //desenho da primeira linha, começar do zero
-      if (i == 0) {
-        drawLineLink(canvas, Offset(30, size.height - 30),
-            Offset(xPoints[i][2].dx, yPoints[pos][2].dy));
-      } else if (i == (nElements - 1)) {
-        //desenho da última linha
-        drawLineLink(canvas, initialPoint, endPoint);
-      } else {
-        //desenho da penúltima linha até a segunda
-        drawLineLink(canvas, initialPoint, endPoint);
-        initialPoint = endPoint;
-      }
-      cont++;
     }
   }
 
   ///desenha uma linha que liga dois pontos
-  drawLineLink(Canvas canvas, Offset p1, Offset p2) {
+  drawLineLink(Canvas canvas, Offset p1, Offset p2, Color color) {
     final paint = Paint()
-      ..color = Colors.black
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     canvas.drawLine(p1, p2, paint);
@@ -230,8 +239,10 @@ class LinePlot extends CustomPainter {
       setText(yValues[i].toString(), canvas, size, yPoints[i][0], "y");
       setText(labels[i], canvas, size, xPoints[i][0], "x");
     }
-
+    //prices.forEach((element) {
+    //for (int k = 0; k < prices.length; k++) {
     drawPoint(canvas, size, prices, xPoints, yPoints, yValues);
+    //}
     drawInitailPoint(canvas, size);
   }
 
