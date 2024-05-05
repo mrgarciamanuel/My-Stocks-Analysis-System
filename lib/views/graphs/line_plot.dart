@@ -73,6 +73,7 @@ class LinePlot extends CustomPainter {
     return [x1.toInt() + 10, y1.toInt(), x1.toInt()];
   }
 
+  ///desenha o ponto inicial de cruzamento os dois eixos
   void drawInitailPoint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = const Color.fromARGB(255, 0, 0, 0)
@@ -83,8 +84,8 @@ class LinePlot extends CustomPainter {
 
   ///desenha marcadores no eixo X
   void drawXMarkers(Canvas canvas, Size size, double startX) {
-    yPoints =
-        []; //zerar sempre no início para não acumular valores além do que preciso
+    //zerar sempre no início para não acumular valores além do que preciso
+    yPoints = [];
     xPoints = [];
     double separator = 45;
     double x = startX;
@@ -151,7 +152,7 @@ class LinePlot extends CustomPainter {
         if (cont == 0) {
           endPoint = Offset(xPoints[i][2].dx, yPoints[pos][2].dy);
         }
-        //print(color.toString());
+
         final paint = Paint()
           ..color = colors[j]!
           ..strokeWidth = 3
@@ -185,6 +186,7 @@ class LinePlot extends CustomPainter {
     canvas.drawLine(p1, p2, paint);
   }
 
+  //escrever textos no canvas
   setText(String text, Canvas canvas, size, Offset location, String axis) {
     const textStyle = TextStyle(
       color: Colors.black,

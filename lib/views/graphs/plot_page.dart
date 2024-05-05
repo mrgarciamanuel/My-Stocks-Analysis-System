@@ -15,12 +15,12 @@ class PlotPage extends StatefulWidget {
 
 class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
-  //var plots = Map<String, CustomPainter>();
   CustomPainter? selectedPlot = LinePlot();
   Map<String, CustomPainter> plots = {
     "line": LinePlot(),
-    "bar": LinePlot(),
-    "pie": LinePlot()
+    "histogram": LinePlot(),
+    "area": LinePlot(),
+    "stacked": LinePlot()
   };
 
   @override
