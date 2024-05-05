@@ -15,9 +15,13 @@ class PlotPage extends StatefulWidget {
 
 class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
-  var plots = Map<String, CustomPainter>();
-
-  //plots["plot"] = LinePlot();
+  //var plots = Map<String, CustomPainter>();
+  CustomPainter? selectedPlot = LinePlot();
+  Map<String, CustomPainter> plots = {
+    "line": LinePlot(),
+    "bar": LinePlot(),
+    "pie": LinePlot()
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,7 @@ class _PlotPageState extends State<PlotPage> {
                       onChanged: (String? value) {
                         setState(() {
                           defaultDropdownValue = value!;
+                          selectedPlot = plots[value];
                         });
                       }),
                   ElevatedButton(
@@ -57,7 +62,7 @@ class _PlotPageState extends State<PlotPage> {
               SizedBox(
                 child: CustomPaint(
                   size: Size(width - 10, width - 10),
-                  painter: LinePlot(),
+                  painter: selectedPlot,
                 ),
               )
             ],

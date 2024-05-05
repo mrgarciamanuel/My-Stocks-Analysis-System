@@ -19,7 +19,7 @@ class LinePlot extends CustomPainter {
   //valores que a empresa tem em cada dia
   List<List<int>> prices = [
     [4, 3, 7, 1, 7, 2, 7],
-    [7, 3, 2, 1, 6, 2, 7]
+    [7, 3, 2, 3, 6, 2, 3]
   ];
 
   getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
@@ -158,13 +158,11 @@ class LinePlot extends CustomPainter {
 
         //desenho da primeira linha, começar do zero
         if (i == 0) {
-          drawLineLink(
-              canvas,
-              Offset(30, size.height - 30),
-              Offset(xPoints[i][2].dx, yPoints[pos][2].dy),
-              j == 0 ? Colors.black : Colors.red);
+          drawLineLink(canvas, Offset(30, size.height - 30),
+              Offset(xPoints[i][2].dx, yPoints[pos][2].dy), colors[j]!);
         } else if (i == (nElements - 1)) {
           //desenho da última linha
+          ///PROBLEMA: a última linha não está sendo desenhada para o segundo array
           drawLineLink(canvas, initialPoint, endPoint, colors[j]!);
         } else {
           //desenho da penúltima linha até a segunda
@@ -239,10 +237,7 @@ class LinePlot extends CustomPainter {
       setText(yValues[i].toString(), canvas, size, yPoints[i][0], "y");
       setText(labels[i], canvas, size, xPoints[i][0], "x");
     }
-    //prices.forEach((element) {
-    //for (int k = 0; k < prices.length; k++) {
     drawPoint(canvas, size, prices, xPoints, yPoints, yValues);
-    //}
     drawInitailPoint(canvas, size);
   }
 
