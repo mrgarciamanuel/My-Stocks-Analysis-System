@@ -18,8 +18,8 @@ class LinePlot extends CustomPainter {
 
   //valores que a empresa tem em cada dia
   List<List<int>> prices = [
-    [4, 3, 7, 1, 7, 2, 7],
-    [7, 3, 2, 3, 6, 2, 3]
+    [4, 1, 3, 1, 7, 4, 1],
+    [7, 3, 2, 3, 6, 2, 4]
   ];
 
   getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
@@ -83,6 +83,9 @@ class LinePlot extends CustomPainter {
 
   ///desenha marcadores no eixo X
   void drawXMarkers(Canvas canvas, Size size, double startX) {
+    yPoints =
+        []; //zerar sempre no início para não acumular valores além do que preciso
+    xPoints = [];
     double separator = 45;
     double x = startX;
 
@@ -124,8 +127,9 @@ class LinePlot extends CustomPainter {
     Map<int, Color> colors = {0: Colors.black, 1: Colors.red};
     Offset initialPoint = const Offset(0, 0);
     Offset endPoint = const Offset(0, 0);
-    int cont = 0;
+
     for (int j = 0; j < prices.length; j++) {
+      int cont = 0;
       for (int i = (nElements - 1); i >= 0; i--) {
         //posição do valor no eixo y
         var value = prices[j][i];
@@ -161,8 +165,6 @@ class LinePlot extends CustomPainter {
           drawLineLink(canvas, Offset(30, size.height - 30),
               Offset(xPoints[i][2].dx, yPoints[pos][2].dy), colors[j]!);
         } else if (i == (nElements - 1)) {
-          //desenho da última linha
-          ///PROBLEMA: a última linha não está sendo desenhada para o segundo array
           drawLineLink(canvas, initialPoint, endPoint, colors[j]!);
         } else {
           //desenho da penúltima linha até a segunda

@@ -35,7 +35,7 @@ class _PlotPageState extends State<PlotPage> {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   DropdownButton(
                       items: items,
@@ -46,13 +46,6 @@ class _PlotPageState extends State<PlotPage> {
                           selectedPlot = plots[value];
                         });
                       }),
-                  ElevatedButton(
-                      //trigger the graph generation
-                      onPressed: () {
-                        showSnackBar(context,
-                            "You choosed: $defaultDropdownValue to plot", 0);
-                      },
-                      child: const Text("Generate Graph"))
                 ],
               ),
               const SizedBox(
