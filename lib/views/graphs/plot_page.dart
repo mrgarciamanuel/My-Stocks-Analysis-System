@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
 import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
+import 'package:my_stock_analsys/views/graphs/area_plot.dart';
 import 'package:my_stock_analsys/views/graphs/line_plot.dart';
 
 class PlotPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _PlotPageState extends State<PlotPage> {
   Map<String, CustomPainter> plots = {
     "line": LinePlot(companies),
     "histogram": LinePlot(companies),
-    "area": LinePlot(companies),
+    "area": AreaPlot(companies),
     "stacked": LinePlot(companies)
   };
 
