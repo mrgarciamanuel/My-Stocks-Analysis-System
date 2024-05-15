@@ -1,0 +1,10 @@
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/CMakeFiles/INSTALL.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/CMakeFiles/ALL_BUILD.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/CMakeFiles/ZERO_CHECK.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/flutter/CMakeFiles/flutter_assemble.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/flutter/CMakeFiles/INSTALL.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/runner/CMakeFiles/my_stock_analsys.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/runner/CMakeFiles/INSTALL.dir
+C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/runner/CMakeFiles/ALL_BUILD.dir

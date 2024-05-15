@@ -1,0 +1,28 @@
+^C:\FEGI\PROJECTS\MY-STOCKS-ANALYSIS-SYSTEM\BUILD\WINDOWS\X64\CMAKEFILES\964843735E35EE4ABAB36CCF85260C90\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Fegi\bin\sdk\3.16.9\flutter PROJECT_DIR=C:\Fegi\projects\My-Stocks-Analysis-System FLUTTER_ROOT=C:\Fegi\bin\sdk\3.16.9\flutter FLUTTER_EPHEMERAL_DIR=C:\Fegi\projects\My-Stocks-Analysis-System\windows\flutter\ephemeral PROJECT_DIR=C:\Fegi\projects\My-Stocks-Analysis-System FLUTTER_TARGET=C:\Fegi\projects\My-Stocks-Analysis-System\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC9mNDBlOTc2YmVkZmY1N2U2OWUxYjNkODlhN2MyYTNjNjE3YTAzZGFkLw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Fegi\projects\My-Stocks-Analysis-System\.dart_tool\package_config.json C:/Fegi/bin/sdk/3.16.9/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\FEGI\PROJECTS\MY-STOCKS-ANALYSIS-SYSTEM\BUILD\WINDOWS\X64\CMAKEFILES\298C7BBE36039551ECDBDB97F86E23C7\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\FEGI\PROJECTS\MY-STOCKS-ANALYSIS-SYSTEM\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Fegi/projects/My-Stocks-Analysis-System/windows -BC:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64 --check-stamp-file C:/Fegi/projects/My-Stocks-Analysis-System/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

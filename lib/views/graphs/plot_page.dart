@@ -3,6 +3,7 @@ import 'package:my_stock_analsys/controllers/general.dart';
 import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
 import 'package:my_stock_analsys/views/graphs/line_plot.dart';
+import 'package:my_stock_analsys/views/graphs/staked_plot.dart';
 
 class PlotPage extends StatefulWidget {
   //this list brings the selected companies from the home page
@@ -27,7 +28,7 @@ class _PlotPageState extends State<PlotPage> {
     "line": LinePlot(companies),
     "histogram": LinePlot(companies),
     "area": LinePlot(companies),
-    "stacked": LinePlot(companies)
+    "stacked": StackedLinePlot(companies)
   };
 
   @override

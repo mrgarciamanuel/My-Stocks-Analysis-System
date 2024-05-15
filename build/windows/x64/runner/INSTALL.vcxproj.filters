@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Fegi\projects\My-Stocks-Analysis-System\build\windows\x64\CMakeFiles\95bd5af9f559fc23b18e84f62995c14f\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{380730AF-2F73-3064-AEFE-544AF4DD4A7C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
