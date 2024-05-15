@@ -139,7 +139,7 @@ class LinePlot extends CustomPainter {
     Offset initialPoint = const Offset(0, 0);
     Offset endPoint = const Offset(0, 0);
 
-    for (int j = 0; j < prices.length; j++) {
+    for (int j = 0; j < companies.length; j++) {
       int cont = 0;
       for (int i = (nElements - 1); i >= 0; i--) {
         //posição do valor no eixo y
@@ -162,7 +162,7 @@ class LinePlot extends CustomPainter {
         if (cont == 0) {
           endPoint = Offset(xPoints[i][2].dx, yPoints[pos][2].dy);
         }
-
+        debugPrint(j.toString());
         final paint = Paint()
           ..color = companies[j].color
           ..strokeWidth = 3
