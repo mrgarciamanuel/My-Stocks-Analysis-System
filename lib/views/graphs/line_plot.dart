@@ -162,7 +162,6 @@ class LinePlot extends CustomPainter {
         if (cont == 0) {
           endPoint = Offset(xPoints[i][2].dx, yPoints[pos][2].dy);
         }
-        debugPrint(j.toString());
         final paint = Paint()
           ..color = companies[j].color
           ..strokeWidth = 3
