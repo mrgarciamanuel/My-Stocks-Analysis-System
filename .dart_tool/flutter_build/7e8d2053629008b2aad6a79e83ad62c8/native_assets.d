@@ -1,1 +1,0 @@
- C:\\Fegi\\projects\\My-Stocks-Analysis-System\\.dart_tool\\flutter_build\\7e8d2053629008b2aad6a79e83ad62c8\\native_assets.yaml: 
