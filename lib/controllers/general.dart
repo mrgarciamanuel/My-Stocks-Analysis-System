@@ -40,20 +40,15 @@ showSnackBar(BuildContext context, String message, int error) {
   );
 }
 
-generateGraph(BuildContext context, List<Company> companies) {
-  List<Company> data = [];
-  for (var company in companies) {
-    if (company.value == true) {
-      data.add(company);
-    }
-  }
+generateGraph(BuildContext context, List<Company> myCompanies) {
+  List<Company> data = myCompanies;
 
   if (data.isNotEmpty) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PlotPage(
-                  companies: data,
+                  myCompanies: data,
                 )));
   } else {
     showSnackBar(context, "Need to select at least one company", 1);
