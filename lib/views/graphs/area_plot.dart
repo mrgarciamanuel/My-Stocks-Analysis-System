@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/models/company.dart';
 
 class AreaPlot extends CustomPainter {
-  final List<Company> companies = [];
-  AreaPlot(List<Company> selectedCompanies) {
-    companies.addAll(selectedCompanies);
-  }
+  final List<Company> companies;
+  AreaPlot(this.companies);
+
   int nElements = 7;
   List<List<Offset>> xPoints = [];
   List<List<Offset>> yPoints = [];
@@ -21,13 +20,13 @@ class AreaPlot extends CustomPainter {
   // Available y values that a company can have
   List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
 
-  // Company prices over the given days
+  // Company prices over the given days (for demonstration purposes)
   List<List<int>> prices = [
     [4, 1, 3, 1, 7, 6, 1],
     [7, 3, 2, 3, 6, 2, 4]
   ];
 
-  getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
+  Paint getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
     final customPaint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth
@@ -116,7 +115,6 @@ class AreaPlot extends CustomPainter {
       List<List<Offset>> xPoints,
       List<List<Offset>> yPoints,
       List<int> yValues) {
-    Map<int, Color> colors = {0: Colors.black.withOpacity(0.4), 1: Colors.red.withOpacity(0.4)};
     Path path = Path();
 
     for (int j = 0; j < prices.length; j++) {
@@ -133,14 +131,15 @@ class AreaPlot extends CustomPainter {
       path.close();
 
       final paint = Paint()
-        ..color = colors[j]!
+        ..color = companies[j].color.withOpacity(0.4)
         ..style = PaintingStyle.fill;
 
       canvas.drawPath(path, paint);
     }
   }
 
-  setText(String text, Canvas canvas, size, Offset location, String axis) {
+  void setText(
+      String text, Canvas canvas, Size size, Offset location, String axis) {
     const textStyle = TextStyle(
       color: Colors.black,
       fontSize: 12,

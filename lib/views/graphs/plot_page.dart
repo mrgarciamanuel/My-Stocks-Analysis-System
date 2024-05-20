@@ -7,8 +7,8 @@ import 'package:my_stock_analsys/views/graphs/line_plot.dart';
 
 class PlotPage extends StatefulWidget {
   //this list brings the selected companies from the home page
-  final List<Company>? companies;
-  const PlotPage({super.key, this.companies});
+  final List<Company>? myCompanies;
+  const PlotPage({super.key, this.myCompanies});
 
   @override
   State<PlotPage> createState() => _PlotPageState();
@@ -16,19 +16,20 @@ class PlotPage extends StatefulWidget {
 
 class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
+  CustomPainter? selectedPlot;
 
   @override
   void initState() {
     super.initState();
-    companies = widget.companies!;
+    myCompanies = widget.myCompanies!;
+    selectedPlot = LinePlot(myCompanies);
   }
 
-  CustomPainter? selectedPlot = LinePlot(companies);
   Map<String, CustomPainter> plots = {
-    "line": LinePlot(companies),
-    "histogram": LinePlot(companies),
-    "area": AreaPlot(companies),
-    "stacked": LinePlot(companies)
+    "line": LinePlot(myCompanies),
+    "histogram": LinePlot(myCompanies),
+    "area": AreaPlot(myCompanies),
+    "stacked": LinePlot(myCompanies)
   };
 
   @override
@@ -40,7 +41,7 @@ class _PlotPageState extends State<PlotPage> {
           child: Column(
             children: <Widget>[
               const SizedBox(
-                height: 20,
+                height: 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +58,7 @@ class _PlotPageState extends State<PlotPage> {
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 5,
               ),
               //this can be replaced wiht widget that will display the graph
               SizedBox(
@@ -65,6 +66,33 @@ class _PlotPageState extends State<PlotPage> {
                   size: Size(width - 10, width - 10),
                   painter: selectedPlot,
                 ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Text(myCompanies[0].name),
+                      Text("________",
+                          style: TextStyle(
+                              color: myCompanies[0].color, fontSize: 20))
+                    ],
+                  ),
+                  myCompanies.length > 1
+                      ? Column(
+                          children: [
+                            Text(myCompanies[1].name),
+                            Text("________",
+                                style: TextStyle(
+                                    color: myCompanies[1].color, fontSize: 20))
+                          ],
+                        )
+                      : const SizedBox()
+                ],
               )
             ],
           ),

@@ -4,7 +4,12 @@ import 'package:my_stock_analsys/models/company.dart';
 class LinePlot extends CustomPainter {
   final List<Company> companies = [];
   LinePlot(List<Company> selectedCompanies) {
-    companies.addAll(selectedCompanies);
+    for (var company in selectedCompanies) {
+      if (company.value == true) {
+        companies.add(company);
+      }
+    }
+    //companies.addAll(selectedCompanies);
   }
   int nElements = 7;
   List<List<Offset>> xPoints = [];
@@ -130,11 +135,11 @@ class LinePlot extends CustomPainter {
       List<List<Offset>> xPoints,
       List<List<Offset>> yPoints,
       List<int> yValues) {
-    Map<int, Color> colors = {0: Colors.black, 1: Colors.red};
+    //Map<int, Color> colors = {0: Colors.black, 1: Colors.red};
     Offset initialPoint = const Offset(0, 0);
     Offset endPoint = const Offset(0, 0);
 
-    for (int j = 0; j < prices.length; j++) {
+    for (int j = 0; j < companies.length; j++) {
       int cont = 0;
       for (int i = (nElements - 1); i >= 0; i--) {
         //posição do valor no eixo y
@@ -157,9 +162,8 @@ class LinePlot extends CustomPainter {
         if (cont == 0) {
           endPoint = Offset(xPoints[i][2].dx, yPoints[pos][2].dy);
         }
-
         final paint = Paint()
-          ..color = colors[j]!
+          ..color = companies[j].color
           ..strokeWidth = 3
           ..style = PaintingStyle.fill;
 
@@ -169,12 +173,12 @@ class LinePlot extends CustomPainter {
         //desenho da primeira linha, começar do zero
         if (i == 0) {
           drawLineLink(canvas, Offset(30, size.height - 30),
-              Offset(xPoints[i][2].dx, yPoints[pos][2].dy), colors[j]!);
+              Offset(xPoints[i][2].dx, yPoints[pos][2].dy), companies[j].color);
         } else if (i == (nElements - 1)) {
-          drawLineLink(canvas, initialPoint, endPoint, colors[j]!);
+          drawLineLink(canvas, initialPoint, endPoint, companies[j].color);
         } else {
           //desenho da penúltima linha até a segunda
-          drawLineLink(canvas, initialPoint, endPoint, colors[j]!);
+          drawLineLink(canvas, initialPoint, endPoint, companies[j].color);
           initialPoint = endPoint;
         }
         cont++;

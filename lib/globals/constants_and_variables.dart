@@ -11,6 +11,7 @@ Company google = Company(
   country: 'United States',
   industry: 'Technology',
   url: 'https://www.google.com',
+  color: Colors.blue,
   value: false,
 );
 
@@ -23,6 +24,7 @@ Company facebook = Company(
   country: 'United States',
   industry: 'Technology',
   url: 'https://www.facebook.com',
+  color: Colors.red,
   value: false,
 );
 
@@ -35,6 +37,7 @@ Company microsoft = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.microsoft.com',
+    color: Colors.green,
     value: false);
 
 Company apple = Company(
@@ -46,6 +49,7 @@ Company apple = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.apple.com',
+    color: Colors.grey,
     value: false);
 
 Company tesla = Company(
@@ -57,6 +61,7 @@ Company tesla = Company(
     country: 'United States',
     industry: 'Automotive',
     url: 'https://www.tesla.com',
+    color: Colors.amber,
     value: false);
 
 Company amazon = Company(
@@ -68,6 +73,7 @@ Company amazon = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.amazon.com',
+    color: Colors.orange,
     value: false);
 
 Company nvidia = Company(
@@ -79,6 +85,7 @@ Company nvidia = Company(
   country: 'United States',
   industry: 'Technology',
   url: 'https://www.nvidia.com',
+  color: Colors.teal,
   value: false,
 );
 
@@ -91,6 +98,7 @@ Company intel = Company(
   country: 'United States',
   industry: 'Technology',
   url: 'https://www.intel.com',
+  color: Colors.purple,
   value: false,
 );
 
@@ -103,6 +111,7 @@ Company netflix = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.netflix.com',
+    color: Colors.pink,
     value: false);
 
 Company twitter = Company(
@@ -114,6 +123,7 @@ Company twitter = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.twitter.com',
+    color: Colors.yellow,
     value: false);
 
 Company disney = Company(
@@ -125,6 +135,7 @@ Company disney = Company(
     country: 'United States',
     industry: 'Entertainment',
     url: 'https://www.disney.com',
+    color: Colors.blueGrey,
     value: false);
 
 Company salesforce = Company(
@@ -136,6 +147,7 @@ Company salesforce = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.salesforce.com',
+    color: Colors.lightGreen,
     value: false);
 
 Company ibm = Company(
@@ -147,6 +159,7 @@ Company ibm = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.ibm.com',
+    color: Colors.indigo,
     value: false);
 
 Company cisco = Company(
@@ -158,6 +171,7 @@ Company cisco = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.cisco.com',
+    color: Colors.deepOrange,
     value: false);
 
 Company oracle = Company(
@@ -169,6 +183,7 @@ Company oracle = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.oracle.com',
+    color: Colors.deepPurple,
     value: false);
 
 Company hp = Company(
@@ -180,6 +195,7 @@ Company hp = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.hp.com',
+    color: Colors.lime,
     value: false);
 
 Company dell = Company(
@@ -191,6 +207,7 @@ Company dell = Company(
     country: 'United States',
     industry: 'Technology',
     url: 'https://www.dell.com',
+    color: Colors.cyan,
     value: false);
 
 Company spacex = Company(
@@ -202,6 +219,7 @@ Company spacex = Company(
     country: 'United States',
     industry: 'Aerospace',
     url: 'https://www.spacex.com',
+    color: Colors.amber,
     value: false);
 
 Company boeing = Company(
@@ -213,6 +231,7 @@ Company boeing = Company(
     country: 'United States',
     industry: 'Aerospace',
     url: 'https://www.boeing.com',
+    color: Colors.blue,
     value: false);
 
 List<Company> companies = [
@@ -236,6 +255,8 @@ List<Company> companies = [
   spacex,
   boeing,
 ];
+
+List<Company> myCompanies = [];
 
 var items = [
   const DropdownMenuItem(

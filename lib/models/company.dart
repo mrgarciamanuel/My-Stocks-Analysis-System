@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Company {
   final String name;
   final String simbol;
@@ -6,6 +8,7 @@ class Company {
   final String country;
   final String industry;
   final String url;
+  final MaterialColor color;
   bool? value;
 
   Company(
@@ -16,6 +19,7 @@ class Company {
       required this.country,
       required this.industry,
       required this.url,
+      required this.color,
       this.value});
 
   factory Company.fromJson(Map<String, dynamic> jsonObj) => Company(
@@ -26,5 +30,6 @@ class Company {
         country: jsonObj['country'],
         industry: jsonObj['industry'],
         url: jsonObj['url'],
+        color: jsonObj['color'],
       );
 }
