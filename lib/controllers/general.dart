@@ -87,3 +87,17 @@ AppBar buildAppBar(BuildContext context, String title, bool back) {
     ],
   );
 }
+
+List<String> getDaysLabel(DateTime hoje) {
+  List<String> days = [];
+  DateTime newDay = hoje;
+  for (int i = 0; i < 20; i++) {
+    if (days.length <= 7) {
+      newDay = DateTime(newDay.year, newDay.month, newDay.day - 1);
+      if (newDay.weekday != 0 && newDay.weekday != 7) {
+        days.add(newDay.toString().substring(1, 10));
+      }
+    }
+  }
+  return days;
+}
