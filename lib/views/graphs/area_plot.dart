@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/models/company.dart';
 
 class AreaPlot extends CustomPainter {
-  final List<Company> companies;
-  AreaPlot(this.companies);
+  final List<Company> companies = [];
+  AreaPlot(List<Company> selectedCompanies) {
+    for (var company in selectedCompanies) {
+      if (company.value == true) {
+        companies.add(company);
+      }
+    }
+  }
 
   int nElements = 7;
   List<List<Offset>> xPoints = [];
@@ -117,7 +123,7 @@ class AreaPlot extends CustomPainter {
       List<int> yValues) {
     Path path = Path();
 
-    for (int j = 0; j < prices.length; j++) {
+    for (int j = 0; j < companies.length; j++) {
       path.reset();
       path.moveTo(30, size.height - 30);
 

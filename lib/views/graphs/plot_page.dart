@@ -17,20 +17,20 @@ class PlotPage extends StatefulWidget {
 class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
   CustomPainter? selectedPlot;
+  Map<String, CustomPainter> plots = {};
 
   @override
   void initState() {
     super.initState();
     myCompanies = widget.myCompanies!;
-    selectedPlot = LinePlot(myCompanies);
+    selectedPlot = AreaPlot(myCompanies);
+    plots = {
+      "line": LinePlot(myCompanies),
+      "histogram": LinePlot(myCompanies),
+      "area": AreaPlot(myCompanies),
+      "stacked": LinePlot(myCompanies)
+    };
   }
-
-  Map<String, CustomPainter> plots = {
-    "line": LinePlot(myCompanies),
-    "histogram": LinePlot(myCompanies),
-    "area": AreaPlot(myCompanies),
-    "stacked": LinePlot(myCompanies)
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +52,8 @@ class _PlotPageState extends State<PlotPage> {
                       onChanged: (String? value) {
                         setState(() {
                           defaultDropdownValue = value!;
+                          myCompanies = widget.myCompanies!;
+                          //plots[value!] =
                           selectedPlot = plots[value];
                         });
                       }),

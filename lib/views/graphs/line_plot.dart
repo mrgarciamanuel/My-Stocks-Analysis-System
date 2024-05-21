@@ -138,7 +138,6 @@ class LinePlot extends CustomPainter {
     //Map<int, Color> colors = {0: Colors.black, 1: Colors.red};
     Offset initialPoint = const Offset(0, 0);
     Offset endPoint = const Offset(0, 0);
-
     for (int j = 0; j < companies.length; j++) {
       int cont = 0;
       for (int i = (nElements - 1); i >= 0; i--) {
