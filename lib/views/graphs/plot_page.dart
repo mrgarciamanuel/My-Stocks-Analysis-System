@@ -4,6 +4,7 @@ import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
 import 'package:my_stock_analsys/views/graphs/area_plot.dart';
 import 'package:my_stock_analsys/views/graphs/line_plot.dart';
+import 'package:my_stock_analsys/controllers/apiCommunication.dart';
 
 class PlotPage extends StatefulWidget {
   //this list brings the selected companies from the home page
@@ -18,6 +19,8 @@ class _PlotPageState extends State<PlotPage> {
   String defaultDropdownValue = "line";
   CustomPainter? selectedPlot;
   Map<String, CustomPainter> plots = {};
+  List<String> labels = getDaysLabel(DateTime.now());
+  late Future<List<List>> result;
 
   @override
   void initState() {
@@ -30,6 +33,8 @@ class _PlotPageState extends State<PlotPage> {
       "area": AreaPlot(myCompanies),
       "stacked": LinePlot(myCompanies)
     };
+
+    result = getCompaniesData(["AAPL", "GOOGL"]);
   }
 
   @override
