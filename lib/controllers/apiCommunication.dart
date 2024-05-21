@@ -25,6 +25,6 @@ Future<List<List>> getCompaniesData(List<String> simbols) async {
   if (values.isNotEmpty) {
     return [values];
   } else {
-    throw Exception('Failed to load companies');
+    throw Exception('Failed to load data');
   }
 }
