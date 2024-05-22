@@ -20,27 +20,47 @@ class _PlotPageState extends State<PlotPage> {
   CustomPainter? selectedPlot;
   Map<String, CustomPainter> plots = {};
   List<String> labels = getDaysLabel(DateTime.now());
-  //late Future<List<List>> result;
+  List<String> symbols = [];
+  late Future<List<List<int>>> result;
+  late Future<List<int>> yValues;
 
   @override
   void initState() {
     super.initState();
     List<List<int>> result = [
       [193, 192, 190, 190, 190, 188, 187],
-      [160, 177, 177, 198, 173, 171, 170]
+      [160, 177, 177, 190, 173, 170, 170]
     ];
-    List<int> yValues = returnPosibleValues(result);
     myCompanies = widget.myCompanies!;
+    for (var company in myCompanies) {
+      symbols.add(company.simbol);
+    }
+    //result = getCompaniesData(symbols);
+    //getCompaniesInfo(symbols);
+    List<int> yValues = returnPosibleValues(result);
+
     selectedPlot = LinePlot(myCompanies, labels, yValues, result);
     plots = {
       "line": LinePlot(myCompanies, labels, yValues, result),
       "histogram": LinePlot(myCompanies, labels, yValues, result),
-      "area": AreaPlot(myCompanies, labels, yValues),
+      "area": AreaPlot(myCompanies, labels, yValues, result),
       "stacked": LinePlot(myCompanies, labels, yValues, result),
     };
-
-    //result = getCompaniesData(["AAPL", "GOOGL"]);
   }
+
+  /*getCompaniesInfo(var symbol) async {
+    var resultado = await getCompaniesData(symbol);
+    yValues = returnPosibleValues(resultado);
+    selectedPlot =
+        LinePlot(myCompanies, labels, yValues as List<int>, resultado);
+    plots = {
+      "line": LinePlot(myCompanies, labels, yValues as List<int>, resultado),
+      "histogram":
+          LinePlot(myCompanies, labels, yValues as List<int>, resultado),
+      "area": AreaPlot(myCompanies, labels, yValues as List<int>, resultado),
+      "stacked": LinePlot(myCompanies, labels, yValues as List<int>, resultado),
+    };
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +83,6 @@ class _PlotPageState extends State<PlotPage> {
                         setState(() {
                           defaultDropdownValue = value!;
                           myCompanies = widget.myCompanies!;
-                          //plots[value!] =
                           selectedPlot = plots[value];
                         });
                       }),

@@ -147,8 +147,8 @@ class AreaPlot extends CustomPainter {
         var pos = yValues.indexOf(value);
         path.lineTo(xPoints[i][2].dx, yPoints[pos][2].dy);
       }
-
-      path.lineTo(xPoints.last[2].dx, size.height - 30);
+      path.lineTo(xPoints[labels.length - 1][2].dx,
+          size.height - 30); //o final terá até o último markers das labels
       path.close();
 
       final paint = Paint()
