@@ -4,10 +4,11 @@ import 'package:my_stock_analsys/models/company.dart';
 class AreaPlot extends CustomPainter {
   final List<Company> companies = [];
   final List<String> labels = [];
-  //final List<int> yValues = [];
+  final List<int> yValues = [];
   //List<List<int>> prices = [];
 
-  AreaPlot(List<Company> selectedCompanies, List<String> labels) {
+  AreaPlot(
+      List<Company> selectedCompanies, List<String> labels, List<int> yValues) {
     for (var company in selectedCompanies) {
       if (company.value == true) {
         companies.add(company);
@@ -28,7 +29,7 @@ class AreaPlot extends CustomPainter {
     '07/05'
   ];*/
   // Available y values that a company can have
-  List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
+  //List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
 
   // Company prices over the given days (for demonstration purposes)
   List<List<int>> prices = [
