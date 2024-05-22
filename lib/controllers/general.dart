@@ -92,7 +92,7 @@ List<String> getDaysLabel(DateTime hoje) {
   List<String> days = [];
   DateTime newDay = hoje;
   for (int i = 0; i < 20; i++) {
-    if (days.length <= 7) {
+    if (days.length < 7) {
       newDay = DateTime(newDay.year, newDay.month, newDay.day - 1);
       //not add holidays in the list
       if (newDay.weekday != 7 && newDay.weekday != 6) {
