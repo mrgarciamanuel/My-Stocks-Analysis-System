@@ -23,23 +23,6 @@ class AreaPlot extends CustomPainter {
   int nElements = 7;
   List<List<Offset>> xPoints = [];
   List<List<Offset>> yPoints = [];
-  /*List<String> labels = [
-    '01/05',
-    '02/05',
-    '03/05',
-    '04/05',
-    '05/05',
-    '06/05',
-    '07/05'
-  ];*/
-  // Available y values that a company can have
-  //List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
-
-  // Company prices over the given days (for demonstration purposes)
-  /*List<List<int>> prices = [
-    [4, 1, 3, 1, 7, 6, 1],
-    [7, 3, 2, 3, 6, 2, 4]
-  ];*/
 
   Paint getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
     final customPaint = Paint()

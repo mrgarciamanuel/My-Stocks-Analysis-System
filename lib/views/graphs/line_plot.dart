@@ -20,19 +20,9 @@ class LinePlot extends CustomPainter {
     this.labels.addAll(labels);
     this.yValues.addAll(yValues);
     this.prices = prices;
-    //companies.addAll(selectedCompanies);
   }
-  //int nElements = prices.length;
   List<List<Offset>> xPoints = [];
   List<List<Offset>> yPoints = [];
-  //valores disponíveis em y que uma empresa pode ter
-  //List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
-
-  //valores que a empresa tem em cada dia
-  /*List<List<int>> prices = [
-    [4, 1, 3, 1, 7, 6, 1],
-    [7, 3, 2, 3, 6, 2, 4]
-  ];*/
 
   getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
     final customPaint = Paint()
