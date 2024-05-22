@@ -3,7 +3,11 @@ import 'package:my_stock_analsys/models/company.dart';
 
 class AreaPlot extends CustomPainter {
   final List<Company> companies = [];
-  AreaPlot(List<Company> selectedCompanies) {
+  final List<String> labels = [];
+  //final List<int> yValues = [];
+  //List<List<int>> prices = [];
+
+  AreaPlot(List<Company> selectedCompanies, List<String> labels) {
     for (var company in selectedCompanies) {
       if (company.value == true) {
         companies.add(company);
@@ -14,7 +18,7 @@ class AreaPlot extends CustomPainter {
   int nElements = 7;
   List<List<Offset>> xPoints = [];
   List<List<Offset>> yPoints = [];
-  List<String> labels = [
+  /*List<String> labels = [
     '01/05',
     '02/05',
     '03/05',
@@ -22,7 +26,7 @@ class AreaPlot extends CustomPainter {
     '05/05',
     '06/05',
     '07/05'
-  ];
+  ];*/
   // Available y values that a company can have
   List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
 
@@ -189,8 +193,13 @@ class AreaPlot extends CustomPainter {
 
     for (int i = 0; i < xPoints.length; i++) {
       setText(yValues[i].toString(), canvas, size, yPoints[i][0], "y");
+    }
+
+    //aqui escrevo os labels no eixo x
+    for (int i = 0; i < labels.length; i++) {
       setText(labels[i], canvas, size, xPoints[i][0], "x");
     }
+
     drawArea(canvas, size, prices, xPoints, yPoints, yValues);
     drawInitailPoint(canvas, size);
   }
