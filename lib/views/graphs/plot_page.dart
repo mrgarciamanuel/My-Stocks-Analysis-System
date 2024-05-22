@@ -35,7 +35,7 @@ class _PlotPageState extends State<PlotPage> {
     plots = {
       "line": LinePlot(myCompanies, labels, yValues, result),
       "histogram": LinePlot(myCompanies, labels, yValues, result),
-      "area": AreaPlot(myCompanies),
+      "area": AreaPlot(myCompanies, labels),
       "stacked": LinePlot(myCompanies, labels, yValues, result),
     };
 
