@@ -5,15 +5,19 @@ class AreaPlot extends CustomPainter {
   final List<Company> companies = [];
   final List<String> labels = [];
   final List<int> yValues = [];
-  //List<List<int>> prices = [];
+  List<List<int>> prices = [];
 
-  AreaPlot(
-      List<Company> selectedCompanies, List<String> labels, List<int> yValues) {
+  AreaPlot(List<Company> selectedCompanies, List<String> labels,
+      List<int> yValues, List<List<int>> prices) {
     for (var company in selectedCompanies) {
       if (company.value == true) {
         companies.add(company);
       }
     }
+
+    this.labels.addAll(labels);
+    this.yValues.addAll(yValues);
+    this.prices = prices;
   }
 
   int nElements = 7;
@@ -32,10 +36,10 @@ class AreaPlot extends CustomPainter {
   //List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
 
   // Company prices over the given days (for demonstration purposes)
-  List<List<int>> prices = [
+  /*List<List<int>> prices = [
     [4, 1, 3, 1, 7, 6, 1],
     [7, 3, 2, 3, 6, 2, 4]
-  ];
+  ];*/
 
   Paint getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
     final customPaint = Paint()
@@ -93,29 +97,35 @@ class AreaPlot extends CustomPainter {
     double separator = 45;
     double x = startX;
 
-    for (int i = 0; i < nElements; i++) {
+    for (int i = 0; i < yValues.length; i++) {
       final p1 = Offset(x + separator, size.height - 25);
       final p2 = Offset(x + separator, size.height - 35);
       final p3 = Offset(x + separator, size.height - 30);
-      canvas.drawLine(
-          p1, p2, getCustomPaint(Colors.black, 1, PaintingStyle.stroke));
+
+      if (i < labels.length) {
+        canvas.drawLine(
+            p1, p2, getCustomPaint(Colors.black, 1, PaintingStyle.stroke));
+      }
+
       xPoints.add([p1, p2, p3]);
       separator += 45;
     }
   }
 
   void drawYMarkers(Canvas canvas, Size size, double startX) {
-    double separator = 45;
+    int valFromYaxys = 30 + 10 + 10;
+    int separator = ((size.height - valFromYaxys) / (yValues.length)).ceil();
+    int helper = separator;
     double x = startX;
     double y = size.height - 20;
-    for (int i = 0; i < nElements; i++) {
-      final p1 = Offset(x + 5, y - separator);
+    for (int i = 0; i < yValues.length; i++) {
+      final p1 = Offset(x, y - separator);
       final p2 = Offset(x + size.width - 30, y - separator);
       final p3 = Offset(x + 10, y - separator);
       canvas.drawLine(
           p1, p2, getCustomPaint(Colors.grey, 1, PaintingStyle.stroke));
       yPoints.add([p1, p2, p3]);
-      separator += 45;
+      separator += helper;
     }
   }
 
@@ -132,7 +142,7 @@ class AreaPlot extends CustomPainter {
       path.reset();
       path.moveTo(30, size.height - 30);
 
-      for (int i = 0; i < nElements; i++) {
+      for (int i = 0; i < prices[j].length; i++) {
         var value = prices[j][i];
         var pos = yValues.indexOf(value);
         path.lineTo(xPoints[i][2].dx, yPoints[pos][2].dy);
