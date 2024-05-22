@@ -30,7 +30,7 @@ class _PlotPageState extends State<PlotPage> {
     //COMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
     List<List<int>> result = [
       [193, 192, 190, 190, 190, 188, 187],
-      [160, 177, 177, 190, 173, 170, 170]
+      [160, 177, 177, 190, 173, 172, 170]
     ];
     myCompanies = widget.myCompanies!;
     for (var company in myCompanies) {
