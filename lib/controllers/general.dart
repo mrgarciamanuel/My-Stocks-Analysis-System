@@ -112,8 +112,6 @@ List<int> returnPosibleValues(List<List<int>> values) {
       }
     }
   }
-
   valores.sort();
-
   return valores;
 }
