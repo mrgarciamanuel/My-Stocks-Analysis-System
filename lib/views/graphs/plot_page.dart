@@ -20,21 +20,26 @@ class _PlotPageState extends State<PlotPage> {
   CustomPainter? selectedPlot;
   Map<String, CustomPainter> plots = {};
   List<String> labels = getDaysLabel(DateTime.now());
-  late Future<List<List>> result;
+  //late Future<List<List>> result;
 
   @override
   void initState() {
     super.initState();
+    List<List<int>> result = [
+      [193, 192, 190, 190, 190, 188, 187],
+      [160, 177, 177, 198, 173, 171, 170]
+    ];
+    List<int> yValues = returnPosibleValues(result);
     myCompanies = widget.myCompanies!;
-    selectedPlot = AreaPlot(myCompanies);
+    selectedPlot = LinePlot(myCompanies, labels, yValues, result);
     plots = {
-      "line": LinePlot(myCompanies),
-      "histogram": LinePlot(myCompanies),
+      "line": LinePlot(myCompanies, labels, yValues, result),
+      "histogram": LinePlot(myCompanies, labels, yValues, result),
       "area": AreaPlot(myCompanies),
-      "stacked": LinePlot(myCompanies)
+      "stacked": LinePlot(myCompanies, labels, yValues, result),
     };
 
-    result = getCompaniesData(["AAPL", "GOOGL"]);
+    //result = getCompaniesData(["AAPL", "GOOGL"]);
   }
 
   @override
