@@ -27,6 +27,7 @@ class _PlotPageState extends State<PlotPage> {
   @override
   void initState() {
     super.initState();
+    //COMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
     List<List<int>> result = [
       [193, 192, 190, 190, 190, 188, 187],
       [160, 177, 177, 190, 173, 170, 170]
@@ -35,7 +36,7 @@ class _PlotPageState extends State<PlotPage> {
     for (var company in myCompanies) {
       symbols.add(company.simbol);
     }
-    //result = getCompaniesData(symbols);
+    //UNCOMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
     //getCompaniesInfo(symbols);
     List<int> yValues = returnPosibleValues(result);
 
@@ -48,6 +49,7 @@ class _PlotPageState extends State<PlotPage> {
     };
   }
 
+  //UNCOMMENT THIS FUNCTION TO USE THE API IF YOU HAVE EFFECTIVE API KEY
   /*getCompaniesInfo(var symbol) async {
     var resultado = await getCompaniesData(symbol);
     yValues = returnPosibleValues(resultado);
