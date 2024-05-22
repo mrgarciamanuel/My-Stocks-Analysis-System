@@ -106,8 +106,12 @@ class LinePlot extends CustomPainter {
       final p1 = Offset(x + separator, size.height - 25);
       final p2 = Offset(x + separator, size.height - 35);
       final p3 = Offset(x + separator, size.height - 30);
-      canvas.drawLine(
-          p1, p2, getCustomPaint(Colors.black, 1, PaintingStyle.stroke));
+
+      if (i < labels.length) {
+        canvas.drawLine(
+            p1, p2, getCustomPaint(Colors.black, 1, PaintingStyle.stroke));
+      }
+
       xPoints.add([p1, p2, p3]);
       separator += 45;
     }
