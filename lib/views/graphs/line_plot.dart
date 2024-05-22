@@ -3,34 +3,36 @@ import 'package:my_stock_analsys/models/company.dart';
 
 class LinePlot extends CustomPainter {
   final List<Company> companies = [];
-  LinePlot(List<Company> selectedCompanies) {
+  final List<String> labels = [];
+  final List<int> yValues = [];
+  List<List<int>> prices = [];
+  LinePlot(
+    List<Company> selectedCompanies,
+    List<String> labels,
+    List<int> yValues,
+    List<List<int>> prices,
+  ) {
     for (var company in selectedCompanies) {
       if (company.value == true) {
         companies.add(company);
       }
     }
+    this.labels.addAll(labels);
+    this.yValues.addAll(yValues);
+    this.prices = prices;
     //companies.addAll(selectedCompanies);
   }
-  int nElements = 7;
+  //int nElements = prices.length;
   List<List<Offset>> xPoints = [];
   List<List<Offset>> yPoints = [];
-  List<String> labels = [
-    '01/05',
-    '02/05',
-    '03/05',
-    '04/05',
-    '05/05',
-    '06/05',
-    '07/05'
-  ];
   //valores disponíveis em y que uma empresa pode ter
-  List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
+  //List<int> yValues = [1, 2, 3, 4, 5, 6, 7];
 
   //valores que a empresa tem em cada dia
-  List<List<int>> prices = [
+  /*List<List<int>> prices = [
     [4, 1, 3, 1, 7, 6, 1],
     [7, 3, 2, 3, 6, 2, 4]
-  ];
+  ];*/
 
   getCustomPaint(Color color, double strokeWidth, PaintingStyle style) {
     final customPaint = Paint()
@@ -100,7 +102,7 @@ class LinePlot extends CustomPainter {
     double separator = 45;
     double x = startX;
 
-    for (int i = 0; i < nElements; i++) {
+    for (int i = 0; i < yValues.length; i++) {
       final p1 = Offset(x + separator, size.height - 25);
       final p2 = Offset(x + separator, size.height - 35);
       final p3 = Offset(x + separator, size.height - 30);
@@ -113,17 +115,22 @@ class LinePlot extends CustomPainter {
 
   ///desenha marcadores no eixo Y
   void drawYMarkers(Canvas canvas, Size size, double startX) {
-    double separator = 45;
+    int valFromYaxys = 30 +
+        10 +
+        10; //tirar os valores do size já ocupados pelas margens do eixo
+    int separator = ((size.height - valFromYaxys) / (yValues.length)).ceil();
+    int helper = separator;
     double x = startX;
-    double y = size.height - 20;
-    for (int i = 0; i < nElements; i++) {
-      final p1 = Offset(x + 5, y - separator);
-      final p2 = Offset(x + size.width - 30, y - separator);
+    double y = size.height - helper;
+    for (int i = 0; i < yValues.length; i++) {
+      final p1 = Offset(x, y - separator); //ponto de partida da linha
+      final p2 =
+          Offset(x + size.width - 30, y - separator); //ponto final da linha
       final p3 = Offset(x + 10, y - separator);
       canvas.drawLine(
           p1, p2, getCustomPaint(Colors.grey, 1, PaintingStyle.stroke));
       yPoints.add([p1, p2, p3]);
-      separator += 45;
+      separator += helper;
     }
   }
 
@@ -140,7 +147,7 @@ class LinePlot extends CustomPainter {
     Offset endPoint = const Offset(0, 0);
     for (int j = 0; j < companies.length; j++) {
       int cont = 0;
-      for (int i = (nElements - 1); i >= 0; i--) {
+      for (int i = (prices[j].length - 1); i >= 0; i--) {
         //posição do valor no eixo y
         var value = prices[j][i];
         var pos = yValues.indexOf(value);
@@ -173,7 +180,7 @@ class LinePlot extends CustomPainter {
         if (i == 0) {
           drawLineLink(canvas, Offset(30, size.height - 30),
               Offset(xPoints[i][2].dx, yPoints[pos][2].dy), companies[j].color);
-        } else if (i == (nElements - 1)) {
+        } else if (i == (yValues.length - 1)) {
           drawLineLink(canvas, initialPoint, endPoint, companies[j].color);
         } else {
           //desenho da penúltima linha até a segunda
@@ -244,11 +251,15 @@ class LinePlot extends CustomPainter {
 
     drawXMarkers(canvas, size, startXaxiX.toDouble());
     drawYMarkers(canvas, size, startXaxiY.toDouble());
-
+    //aqui escrevo os textos no eixo y
     for (int i = 0; i < xPoints.length; i++) {
       setText(yValues[i].toString(), canvas, size, yPoints[i][0], "y");
+    }
+    //aqui escrevo os labels no eixo x
+    for (int i = 0; i < labels.length; i++) {
       setText(labels[i], canvas, size, xPoints[i][0], "x");
     }
+
     drawPoint(canvas, size, prices, xPoints, yPoints, yValues);
     drawInitailPoint(canvas, size);
   }
