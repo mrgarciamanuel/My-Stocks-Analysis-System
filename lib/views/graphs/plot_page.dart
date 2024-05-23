@@ -1,3 +1,4 @@
+import 'package:feup_plotter/feup_plotter.dart';
 import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
 import 'package:my_stock_analsys/globals/constants_and_variables.dart';
@@ -21,14 +22,14 @@ class _PlotPageState extends State<PlotPage> {
   Map<String, CustomPainter> plots = {};
   List<String> labels = getDaysLabel(DateTime.now());
   List<String> symbols = [];
-  late Future<List<List<int>>> result;
+  List<List<int>> result = [];
   late Future<List<int>> yValues;
 
   @override
   void initState() {
     super.initState();
     //COMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
-    List<List<int>> result = [
+    result = [
       [193, 192, 190, 190, 190, 188, 187],
       [160, 177, 177, 190, 173, 172, 170]
     ];
@@ -66,8 +67,12 @@ class _PlotPageState extends State<PlotPage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return FeupPlotter(
+        names: const ["Garcia", "Manuel"],
+        colors: const [Colors.black, Colors.red],
+        result: result,
+        labels:
+            labels); /*Scaffold(
         appBar: buildAppBar(context, "Plot Page", true),
         body: SizedBox(
           child: Column(
@@ -129,6 +134,6 @@ class _PlotPageState extends State<PlotPage> {
               )
             ],
           ),
-        ));
+        ));*/
   }
 }
