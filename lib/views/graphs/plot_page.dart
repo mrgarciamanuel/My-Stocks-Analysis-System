@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
 import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
-import 'package:my_stock_analsys/views/graphs/area_plot.dart';
-import 'package:my_stock_analsys/views/graphs/line_plot.dart';
 import 'package:my_stock_analsys/controllers/apiCommunication.dart';
 
 class PlotPage extends StatefulWidget {
@@ -40,14 +38,6 @@ class _PlotPageState extends State<PlotPage> {
     //UNCOMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
     //getCompaniesInfo(symbols);
     List<int> yValues = returnPosibleValues(result);
-
-    selectedPlot = LinePlot(myCompanies, labels, yValues, result);
-    plots = {
-      "line": LinePlot(myCompanies, labels, yValues, result),
-      "histogram": LinePlot(myCompanies, labels, yValues, result),
-      "area": AreaPlot(myCompanies, labels, yValues, result),
-      "stacked": LinePlot(myCompanies, labels, yValues, result),
-    };
   }
 
   //UNCOMMENT THIS FUNCTION TO USE THE API IF YOU HAVE EFFECTIVE API KEY
@@ -71,69 +61,6 @@ class _PlotPageState extends State<PlotPage> {
         names: const ["Garcia", "Manuel"],
         colors: const [Colors.black, Colors.red],
         result: result,
-        labels:
-            labels); /*Scaffold(
-        appBar: buildAppBar(context, "Plot Page", true),
-        body: SizedBox(
-          child: Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DropdownButton(
-                      items: items,
-                      value: defaultDropdownValue,
-                      onChanged: (String? value) {
-                        setState(() {
-                          defaultDropdownValue = value!;
-                          myCompanies = widget.myCompanies!;
-                          selectedPlot = plots[value];
-                        });
-                      }),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              //this can be replaced wiht widget that will display the graph
-              SizedBox(
-                child: CustomPaint(
-                  size: Size(width - 10, width - 10),
-                  painter: selectedPlot,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Text(myCompanies[0].name),
-                      Text("________",
-                          style: TextStyle(
-                              color: myCompanies[0].color, fontSize: 20))
-                    ],
-                  ),
-                  myCompanies.length > 1
-                      ? Column(
-                          children: [
-                            Text(myCompanies[1].name),
-                            Text("________",
-                                style: TextStyle(
-                                    color: myCompanies[1].color, fontSize: 20))
-                          ],
-                        )
-                      : const SizedBox()
-                ],
-              )
-            ],
-          ),
-        ));*/
+        labels: labels);
   }
 }

@@ -125,7 +125,7 @@ class AreaPlot extends CustomPainter {
       path.reset();
       path.moveTo(30, size.height - 30);
 
-      for (int i = 0; i < prices[j].length; i++) {
+      for (int i = 0; i < labels.length; i++) {
         var value = prices[j][i];
         var pos = yValues.indexOf(value);
         path.lineTo(xPoints[i][2].dx, yPoints[pos][2].dy);
