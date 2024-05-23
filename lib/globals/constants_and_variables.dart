@@ -272,7 +272,7 @@ var items = [
     child: Text("Area Graph"),
   ),
   const DropdownMenuItem(
-    value: "stacked",
-    child: Text("Stacked Graph"),
+    value: "bar",
+    child: Text("Bar Graph"),
   ),
 ];

@@ -4,6 +4,7 @@ import 'package:my_stock_analsys/globals/constants_and_variables.dart';
 import 'package:my_stock_analsys/models/company.dart';
 import 'package:my_stock_analsys/views/graphs/area_plot.dart';
 import 'package:my_stock_analsys/views/graphs/line_plot.dart';
+import 'package:my_stock_analsys/views/graphs/bar_plot.dart';
 import 'package:my_stock_analsys/controllers/apiCommunication.dart';
 
 class PlotPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _PlotPageState extends State<PlotPage> {
       "line": LinePlot(myCompanies),
       "histogram": LinePlot(myCompanies),
       "area": AreaPlot(myCompanies),
-      "stacked": LinePlot(myCompanies)
+      "bar": BarPlot(myCompanies)
     };
 
     result = getCompaniesData(["AAPL", "GOOGL"]);
