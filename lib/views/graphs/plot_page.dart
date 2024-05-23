@@ -1,3 +1,4 @@
+import 'package:feup_plotter/feup_plotter.dart';
 import 'package:flutter/material.dart';
 import 'package:my_stock_analsys/controllers/general.dart';
 import 'package:my_stock_analsys/globals/constants_and_variables.dart';
@@ -20,27 +21,58 @@ class _PlotPageState extends State<PlotPage> {
   CustomPainter? selectedPlot;
   Map<String, CustomPainter> plots = {};
   List<String> labels = getDaysLabel(DateTime.now());
-  late Future<List<List>> result;
+  List<String> symbols = [];
+  List<List<int>> result = [];
+  late Future<List<int>> yValues;
 
   @override
   void initState() {
     super.initState();
+    //COMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
+    result = [
+      [193, 192, 190, 190, 190, 188, 187],
+      [160, 177, 177, 190, 173, 172, 170]
+    ];
     myCompanies = widget.myCompanies!;
-    selectedPlot = AreaPlot(myCompanies);
-    plots = {
-      "line": LinePlot(myCompanies),
-      "histogram": LinePlot(myCompanies),
-      "area": AreaPlot(myCompanies),
-      "stacked": LinePlot(myCompanies)
-    };
+    for (var company in myCompanies) {
+      symbols.add(company.simbol);
+    }
+    //UNCOMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
+    //getCompaniesInfo(symbols);
+    List<int> yValues = returnPosibleValues(result);
 
-    result = getCompaniesData(["AAPL", "GOOGL"]);
+    selectedPlot = LinePlot(myCompanies, labels, yValues, result);
+    plots = {
+      "line": LinePlot(myCompanies, labels, yValues, result),
+      "histogram": LinePlot(myCompanies, labels, yValues, result),
+      "area": AreaPlot(myCompanies, labels, yValues, result),
+      "stacked": LinePlot(myCompanies, labels, yValues, result),
+    };
   }
+
+  //UNCOMMENT THIS FUNCTION TO USE THE API IF YOU HAVE EFFECTIVE API KEY
+  /*getCompaniesInfo(var symbol) async {
+    var resultado = await getCompaniesData(symbol);
+    yValues = returnPosibleValues(resultado);
+    selectedPlot =
+        LinePlot(myCompanies, labels, yValues as List<int>, resultado);
+    plots = {
+      "line": LinePlot(myCompanies, labels, yValues as List<int>, resultado),
+      "histogram":
+          LinePlot(myCompanies, labels, yValues as List<int>, resultado),
+      "area": AreaPlot(myCompanies, labels, yValues as List<int>, resultado),
+      "stacked": LinePlot(myCompanies, labels, yValues as List<int>, resultado),
+    };
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return FeupPlotter(
+        names: const ["Garcia", "Manuel"],
+        colors: const [Colors.black, Colors.red],
+        result: result,
+        labels:
+            labels); /*Scaffold(
         appBar: buildAppBar(context, "Plot Page", true),
         body: SizedBox(
           child: Column(
@@ -58,7 +90,6 @@ class _PlotPageState extends State<PlotPage> {
                         setState(() {
                           defaultDropdownValue = value!;
                           myCompanies = widget.myCompanies!;
-                          //plots[value!] =
                           selectedPlot = plots[value];
                         });
                       }),
@@ -103,6 +134,6 @@ class _PlotPageState extends State<PlotPage> {
               )
             ],
           ),
-        ));
+        ));*/
   }
 }

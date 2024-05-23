@@ -92,12 +92,26 @@ List<String> getDaysLabel(DateTime hoje) {
   List<String> days = [];
   DateTime newDay = hoje;
   for (int i = 0; i < 20; i++) {
-    if (days.length <= 7) {
+    if (days.length < 7) {
       newDay = DateTime(newDay.year, newDay.month, newDay.day - 1);
-      if (newDay.weekday != 0 && newDay.weekday != 7) {
-        days.add(newDay.toString().substring(1, 10));
+      //not add holidays in the list
+      if (newDay.weekday != 7 && newDay.weekday != 6) {
+        days.add(newDay.toString().substring(5, 10));
       }
     }
   }
   return days;
+}
+
+List<int> returnPosibleValues(List<List<int>> values) {
+  List<int> valores = [];
+  for (int i = 0; i < values.length; i++) {
+    for (int j = 0; j < values[i].length; j++) {
+      if (!valores.contains(values[i][j])) {
+        valores.add(values[i][j]);
+      }
+    }
+  }
+  valores.sort();
+  return valores;
 }
