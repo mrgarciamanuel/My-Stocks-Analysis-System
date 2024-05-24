@@ -22,6 +22,7 @@ class _PlotPageState extends State<PlotPage> {
   List<String> symbols = [];
   List<List<int>> result = [];
   late Future<List<int>> yValues;
+  List<String> names = [];
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _PlotPageState extends State<PlotPage> {
     myCompanies = widget.myCompanies!;
     for (var company in myCompanies) {
       symbols.add(company.simbol);
+      names.add(company.name);
     }
     //UNCOMMENT THIS LINE TO USE THE API IF YOU HAVE EFFECTIVE API KEY
     //getCompaniesInfo(symbols);
@@ -58,7 +60,7 @@ class _PlotPageState extends State<PlotPage> {
   @override
   Widget build(BuildContext context) {
     return FeupPlotter(
-        names: const ["Garcia", "Manuel"],
+        names: names,
         colors: const [Colors.black, Colors.red],
         result: result,
         labels: labels);
